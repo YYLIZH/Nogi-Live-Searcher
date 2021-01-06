@@ -21,7 +21,7 @@ document.querySelector('button').onclick = function () {
             let todayTickers = []
             for (let timeTicker of timeTickers) {
                 if (timeTicker.textContent.trim().length == 5) {
-                    if (timeTicker.textContent.trim().slice(-2) == '05') {
+                    if (timeTicker.textContent.trim().slice(-2) == dd) {
                         todayTickers.push(timeTicker)
                     }
                 }
