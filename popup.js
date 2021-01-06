@@ -1,32 +1,42 @@
-fetch("https://theqoo.net/index.php?mid=nogizaka46&filter_mode=normal&category=831246894")
-    .then(response => {
-        return response.text()
-    })
-    .then(res => {
-        let parser = new DOMParser()
-        let doc = parser.parseFromString(res, 'text/html')
-        let timeTickers = doc.getElementsByClassName('time')
-        const today = new Date()
-        const dd = String(today.getDate()).padStart(2, '0');
-        let todayTickers = []
-        for (let timeTicker of timeTickers) {
-            if (timeTicker.textContent.trim().length == 5) {
-                if (timeTicker.textContent.trim().slice(-2) == dd) {
-                    todayTickers.push(timeTicker)
+document.querySelector('button').onclick = function () {
+    let e = document.getElementById('saka')
+    let url
+    if (e.value === "nogi") {
+        url = "https://theqoo.net/index.php?mid=nogizaka46&filter_mode=normal&category=831246894"
+    } else if (e.value === "hina") {
+        url = "https://theqoo.net/index.php?mid=hinatazaka46&filter_mode=normal&category=1014863170"
+    } else {
+        url = "https://theqoo.net/index.php?mid=sakurazaka46&filter_mode=normal&category=831246726"
+    }
+    fetch(url)
+        .then(response => {
+            return response.text()
+        })
+        .then(res => {
+            let parser = new DOMParser()
+            let doc = parser.parseFromString(res, 'text/html')
+            let timeTickers = doc.getElementsByClassName('time')
+            const today = new Date()
+            const dd = String(today.getDate()).padStart(2, '0');
+            let todayTickers = []
+            for (let timeTicker of timeTickers) {
+                if (timeTicker.textContent.trim().length == 5) {
+                    if (timeTicker.textContent.trim().slice(-2) == '05') {
+                        todayTickers.push(timeTicker)
+                    }
                 }
             }
-        }
-        if (todayTickers.length > 0) {
-            for (let i = 0; i < todayTickers.length; i++) {
-                fromTimeGetUrl(todayTickers[i])
+            if (todayTickers.length > 0) {
+                for (let i = 0; i < todayTickers.length; i++) {
+                    fromTimeGetUrl(todayTickers[i])
+                }
+            } else {
+                let display = document.getElementById('display')
+                display.textContent = "There is no Live today!"
             }
-        } else {
-            let display = document.getElementById('display')
-            display.textContent = "There is no Live today!"
-        }
 
-    })
-
+        })
+}
 
 async function fromTimeGetUrl(timeTicker) {
     let title = timeTicker.previousElementSibling;
