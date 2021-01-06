@@ -1,0 +1,25 @@
+{
+    "manifest_version": 2,
+    "name": "韓網直播搜尋器",
+    "description": "大園桃子我老婆",
+    "version": "1.0",
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "css": [],
+        "run_at": "document_end"
+    }],
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    },
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "activeTab",
+        "tabs"
+    ]
+}
