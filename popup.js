@@ -16,12 +16,12 @@ document.querySelector('button').onclick = function () {
             let parser = new DOMParser()
             let doc = parser.parseFromString(res, 'text/html')
             let timeTickers = doc.getElementsByClassName('time')
-            const today = new Date()
-            const dd = String(today.getDate()).padStart(2, '0');
+            //const today = new Date()
+            //const dd = String(today.getDate()).padStart(2, '0');
             let todayTickers = []
             for (let timeTicker of timeTickers) {
                 if (timeTicker.textContent.trim().length == 5) {
-                    if (timeTicker.textContent.trim().slice(-2) == dd) {
+                    if (timeTicker.textContent.trim()[2] === ":") {
                         todayTickers.push(timeTicker)
                     }
                 }
